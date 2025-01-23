@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0, viewport-fit=cover"
+    />
+    <title>FULiveDemo</title>
+    <script>
+      const regex = /Mobi|Android|iPhone/i;
+      const isMobile = navigator.userAgent && regex.test(navigator.userAgent);
+      (() => {
+        function setFontSize(e) {
+          const mediaQuery = window.matchMedia("(orientation: portrait)");
+          const designWidth = !mediaQuery.matches ? 1368 : 750;
+          if (!isMobile) return;
+          const screenWidth = window.innerWidth;
+          let fontSize;
+          fontSize = (screenWidth * 100) / designWidth;
+          document.documentElement.style.fontSize = `${fontSize}px`;
+        }
+        // 初始化设置
+        setFontSize();
+        // 当窗口大小改变时重新计算字体大小
+        window.addEventListener("resize", setFontSize);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

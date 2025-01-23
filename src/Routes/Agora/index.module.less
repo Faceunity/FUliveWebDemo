@@ -1,0 +1,67 @@
+.agora {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: #f1f1f1;
+  &.mobile {
+    font-size: 0.36rem;
+    .form:not(.joined) {
+      padding: 1rem 0.24rem;
+      > div {
+        margin-bottom: 0.24rem;
+      }
+      input {
+        width: 100%;
+        margin-bottom: 0.24rem;
+      }
+    }
+
+    .joined {
+      top: 1.2rem;
+      z-index: 200;
+      pointer-events: all;
+      gap: 0.2rem;
+    }
+
+    .fanzhuan {
+      width: 0.48rem;
+      height: 0.48rem;
+      object-fit: cover;
+    }
+  }
+  .form:not(.joined) {
+    padding: 100px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    input {
+      user-select: text;
+      -webkit-user-select: text;
+    }
+    > div {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    input {
+      width: 400px;
+      margin-bottom: 24px;
+    }
+  }
+  &.pc {
+    .joined {
+      top: 21px;
+      button {
+        pointer-events: all;
+      }
+    }
+  }
+  .joined {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+}

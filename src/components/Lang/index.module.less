@@ -1,0 +1,72 @@
+.lgBtn {
+  font-family: PingFang SC;
+  font-weight: 400;
+  text-align: center;
+  cursor: pointer;
+  &.pc {
+    line-height: 14px;
+    font-size: 14px;
+    color: #4f4f50;
+    .text {
+      margin-right: 8px;
+    }
+  }
+
+  &.mobile {
+    line-height: 0.14rem;
+    font-size: 0.14rem;
+    img {
+      width: 0.44rem;
+      height: 0.44rem;
+      object-fit: cover;
+    }
+  }
+}
+
+.pcOpt {
+  .langOpt {
+    padding: 12px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    &:not(:last-of-type) {
+      margin-bottom: 10px;
+    }
+    &.active {
+      background: #287cfa1a;
+    }
+  }
+}
+
+:global {
+  .lang-switch-opts {
+    &.mobOpts {
+      .adm-popover-inner-content {
+        padding: 0.24rem 0.32rem;
+      }
+    }
+    .adm-popover-arrow {
+      display: none;
+    }
+    .adm-popover-inner-content {
+      padding: 16px;
+    }
+  }
+}
+
+.mobileOpt {
+  display: flex;
+  align-items: center;
+  gap: 0.32rem;
+  .langOpt {
+    opacity: 0.3;
+    img {
+      width: 0.44rem;
+      height: 0.44rem;
+      object-fit: cover;
+    }
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}
