@@ -1,0 +1,245 @@
+@scale: 100;
+.playerWrap {
+  &:not(.mobile) {
+    flex: 1;
+  }
+  height: 100%;
+  // height: calc(100% - constant(safe-area-inset-bottom));
+  // height: calc(100% - env(safe-area-inset-bottom));
+  border-radius: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #000;
+  :global {
+    .adm-mask-content {
+      width: 100%;
+      height: 100%;
+      .ant-spin-nested-loading {
+        height: 100%;
+        .ant-spin {
+          max-height: unset;
+        }
+      }
+    }
+  }
+
+  .statistic {
+    position: absolute;
+    top: 30%;
+    left: 0;
+    z-index: 100;
+  }
+
+  .localUserWrap {
+    // 隐藏本地用户video 用canvas直接显示画面，是因为safari 14.6 手机黑屏无法显示
+    visibility: hidden;
+    width: 100%;
+    // aspect-ratio: 1280/720;
+    position: absolute;
+    left: 0;
+    z-index: 10;
+    overflow: hidden;
+    .localUser {
+      // aspect-ratio: 1280/720;
+      position: absolute;
+      width: ~"@{scale}%";
+      height: 100%;
+      left: ((100 - @scale) / 2) * 1%;
+      top: ((100 - @scale) / 2) * 1%;
+    }
+  }
+
+  .remoteUser {
+    position: fixed;
+    left: 0;
+    top: 10px;
+    z-index: 200;
+    pointer-events: none;
+    // width: 320px;
+    aspect-ratio: 1280/720;
+    video {
+      transform: scale((@scale / 100));
+    }
+  }
+
+  .uid {
+    position: absolute;
+    left: 6px;
+    top: 6px;
+  }
+  .canvasContainer {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 1280/720;
+    // &:not(.bitmap) {
+    //   canvas {
+    //     position: absolute;
+    //     left: -10%;
+    //     top: -10%;
+    //   }
+    // }
+    &.bitmap {
+      aspect-ratio: unset;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &.mobile {
+    .spin {
+      border-radius: 0;
+      .loadingWrap {
+        .tip {
+          font-size: 0.24rem;
+          margin-top: 0.2rem;
+        }
+      }
+    }
+
+    canvas,
+    video,
+    // .localUser,
+    .remoteUser {
+      aspect-ratio: 720/1280;
+    }
+
+    // .localUserWrap,
+    .canvasContainer {
+      aspect-ratio: 720/1280;
+    }
+
+    .statistic {
+      font-size: 0.24rem;
+    }
+
+    .remoteUser {
+      top: 2rem;
+      width: 20%;
+    }
+  }
+  .spin {
+    position: absolute;
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    .loadingWrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .tip {
+        margin-top: 20px;
+        color: #287cfa;
+        font-size: 24px;
+      }
+    }
+    :global {
+      .adm-mask-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+  > video {
+    object-fit: cover;
+    border-radius: 20px;
+    position: absolute;
+    aspect-ratio: 1280/720;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    // display: none; // PC会无法正常显示画面
+  }
+
+  canvas {
+    // width: 120%; // 为了解决https://jira.faceunity.com/browse/NAMADEV-8906
+    width: 100%;
+    aspect-ratio: 1280/720;
+  }
+
+  .compareBtn {
+    position: absolute;
+    padding: 8px 16px;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 25px;
+    border: 1px solid #edf0f2;
+    box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.15);
+    .hover {
+      display: none;
+    }
+    &:hover {
+      .hover {
+        display: flex;
+      }
+      .default {
+        display: none;
+      }
+    }
+    > span {
+      display: flex;
+      align-items: center;
+    }
+    cursor: pointer;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    z-index: 500;
+    &.mob {
+      padding: 0;
+      left: 0.32rem;
+      bottom: 0.32rem;
+      border-radius: 0.25rem;
+      border: none;
+      box-shadow: unset;
+      width: fit-content;
+      background-color: unset;
+      right: unset;
+    }
+  }
+
+  .noface {
+    pointer-events: none;
+    :global {
+      .adm-mask-content {
+        font-family: PingFang SC;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 28px;
+        text-align: center;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        pointer-events: none;
+      }
+    }
+  }
+
+  &.mobile {
+    border-radius: 0;
+    canvas,
+    video {
+      border-radius: 0;
+    }
+  }
+}
+
+.upload {
+  position: fixed;
+  width: fit-content;
+  right: 8%;
+  top: 3%;
+  z-index: 9999;
+}

@@ -1,0 +1,33 @@
+variables:
+  CONTAINER_PATH: "harbor.faceunity.com/nama/web-demo"
+
+stages:
+  - build
+  - deploy-prod
+
+  # 安装依赖的作业
+build-test:
+  only:
+    - tags
+  stage: build
+  script:
+    - docker -v
+    - docker buildx build --push --rm -t ${CONTAINER_PATH}:${CI_BUILD_TAG}-test --build-arg APP_ENV=test .
+
+build-prod:
+  stage: build
+  only:
+    - tags
+  script:
+    - docker -v
+    - docker buildx build -t ${CONTAINER_PATH}:${CI_BUILD_TAG}-prod --build-arg APP_ENV=prod .
+  when: manual
+
+deploy-prod:
+  only:
+    - tags
+  stage: deploy-prod
+  script:
+    - docker push ${CONTAINER_PATH}:${CI_BUILD_TAG}-prod
+    - docker rmi ${CONTAINER_PATH}:${CI_BUILD_TAG}-prod
+  when: manual
