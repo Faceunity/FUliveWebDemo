@@ -27,7 +27,7 @@ self.addEventListener(
         shared.setParams(msg);
         break;
       case "setStickers":
-        shared.setStciker(msg);
+        shared.setSticker(msg);
         break;
       case "clearSticker":
         shared.clearSticker();

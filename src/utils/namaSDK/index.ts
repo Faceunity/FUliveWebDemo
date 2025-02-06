@@ -423,7 +423,7 @@ class NamaSDK {
         },
       });
     } else {
-      this.sharaedLogic.setStciker({ key, bundle });
+      this.sharaedLogic.setSticker({ key, bundle });
     }
   }
 
