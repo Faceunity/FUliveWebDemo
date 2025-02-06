@@ -22,7 +22,10 @@ FULiveDemo is an integration example, that integrates Faceunity's Face AR SDK (a
 
 This example has integrated various interesting features of Faceunity's Face AR SDK, such as Face landmarks and Face Beautification, Stickers, etc.
 
-
+### Doc
+1. [Web_Nama_Demo_Guide](./docs/Web_Nama_Demo_Guide.md)，Introduction to running the demo.
+2. [Web_Nama_SDK_Integration_Guide](./docs/Web_Nama_SDK_Integration_Guide.md)，Introduction to integrating Web Nama SDK.   
+3. [Web_Nama_API_Reference](./docs/Web_Nama_API_Reference.md)，Web Nama SDK reference.
 
 Demo：
 [FULiveWebDemo](https://nama-webdemo.faceunity.com/)

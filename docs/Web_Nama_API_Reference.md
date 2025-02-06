@@ -1,11 +1,12 @@
-Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassembly.d.ts当中
+The Funmawebassembly library is a re-encapsulation of the CNamaSDK, with its interface declarations located within the funamawebassembly.d.ts file
 ```typescript
- /**
+
+  /**
    * @brief CanvasViewport
-   * @note 调用 CanvasViewport.delete 释放内存
+   * @note call CanvasViewport.delete to release memory
    * 
    */
- class CanvasViewport {
+  class CanvasViewport {
     constructor(
         x_: number,
         y_: number,
@@ -17,18 +18,14 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
     y: number;
     w: number;
     h: number;
+
   }
-  
-  
-   /**
-   * @brief 平台枚举值
-   * 
-   */
+
   interface FUPLATFORM {
     value: number;
-    
+
     /** enum values */
-    
+
     /** PC */
     PC: FUPLATFORM;
     /** ANDROID */
@@ -37,12 +34,8 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
     IOS: FUPLATFORM;
     /** HarmonyOS */
     HarmonyOS: FUPLATFORM;
-   }
-  
-   /**
-   * @brief LOG等级枚举值
-   * 
-   */
+  }
+    
   interface FULOGLEVEL {
     value: number;
 
@@ -63,11 +56,7 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
     /** off */
     FU_LOG_LEVEL_OFF: FULOGLEVEL;
   }
-  
-  /**
-   * @brief 渲染功能枚举值
-   * 
-   */
+    
   interface FURENDERFEATURE {
     value: number;
 
@@ -98,11 +87,7 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
     /** MASK */
     RENDER_OPTION_MASK: FURENDERFEATURE;
   }
-  
-  /**
-   * @brief 格式枚举值
-   * 
-   */
+    
   interface FUFORMAT {
     value: number;
 
@@ -121,11 +106,7 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
     /** I420 BUFFER */
     FORMAT_I420_BUFFER: FUFORMAT;
   }
-  
-  /**
-   * @brief 旋转枚举值，用于fuSetInputCameraXXXXMatrix输入
-   * 
-   */
+    
   interface FUTRANSFORM {
     value: number;
 
@@ -164,11 +145,7 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
     /** 280 horizontal flip */
     CCROT270_FLIPVERTICAL_FLIPHORIZONTAL: FUTRANSFORM;
   }
-  
-  /**
-   * @brief AI能力枚举值
-   * 
-   */
+    
   interface FUAITYPE {
     value: number;
 
@@ -231,11 +208,7 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
     /** HUMAN_PROCESSOR_2D_DANCE */
     HUMAN_PROCESSOR_2D_DANCE: FUAITYPE;
   }
-  
-  /**
-   * @brief 人体分割模式
-   * 
-   */
+    
   interface FUAIHUMANSEGMODE {
     value: number;
 
@@ -248,7 +221,7 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
     /** GPU_MEETING */
     SEG_GPU_MEETING: FUAIHUMANSEGMODE;
   }
-  
+    
   interface FUAIFACEMODELCONFIG {
     value: number;
 
@@ -257,10 +230,7 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
     /** DEFAULT */
     FACE_MODEL_ALL_DEFAULT: FUAIFACEMODELCONFIG;
   }
-  /**
-   * @brief 人脸算法配置枚举值
-   * 
-   */
+    
   interface FUAIFACEALGORITHMCONFIG {
     value: number;
 
@@ -292,11 +262,7 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
     /** HIGH */
     HIGH: FUAIMACHINETYPE;
   }
-  
-  /**
-   * @brief 人体模型配置
-   * 
-   */
+    
   interface FUAIHUMANMODELCONFIG {
     value: number;
 
@@ -309,10 +275,7 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
     /** GPU_MEETING */
     MODEL_SEG_GPU_MEETING: FUAIHUMANMODELCONFIG;
   }
-  /**
-   * @brief 人体ai算法能力配置
-   * 
-   */
+    
   interface FUAIHUMANALGORITHMCONFIG {
     value: number;
 
@@ -325,114 +288,132 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
   }
     
   /**
-   * @brief 获取SDK版本号
-   * @return SDK版本号
+   * @brief Get SDK version string, Major.Minor.Fix_ID
+   * @return SDK version string in const char*
    */
   function fuGetVersion(): string;
 
   /**
-   * @brief 设置SDK Log等级
-   * @param level - LOG等级
-     * @return 0为失败，1为成功
+   * @brief Set log level
+   * @param level - define in FULOGLEVEL enumeration.
+   * @return zero for failed, one for success.
    */
   function fuSetLogLevel(
       level: FULOGLEVEL,
   ): number;
 
   /**
-   * @brief 初始化SDK Opengl上下文
-   * @param canvas的id
-   * @return 返回Context 句柄,0为失败
+   * @brief init gl context, which managed by SDK
+   * @param canvas_id canvas name, can be null.
+   * @return non null for success.
    */
   function fuInitGLContext(
       canvas_id: string,
   ): number;
 
   /**
-   * @brief 初始化系统环境，加载系统数据，并进行网络鉴权。必须在调用SDK其他接口前执行，否则会引发崩溃。
-   * @param 鉴权证书
-   * @return返回非0值代表成功，返回0代表失败。如初始化失败
+   * @brief Initialize and authenticate your SDK instance to the FaceUnity server,
+   * must be called exactly once before all other functions. The buffers should
+   * NEVER be freed while the other functions are still being called. You can call
+   * this function multiple times to "switch pointers".
+   * @param authdata is the pointer to the authentication data pack we provide. You
+   * must avoid storing the data in a file. Normally you can just `#include
+   * "authpack.h"` and put `g_auth_package` here.
+   * @return non-zero for success, zero for failure
    */
   function fuSetup(
       auth: ArrayBuffer | Uint8Array | Uint16Array | Uint32Array,
   ): number;
 
   /**
-   * @brief 设置目标平台
-   * @param platform - 平台枚举值
-   * @note web平台特有的api
+   * @brief set the target plafrom for sdk
+   * @param platform - define in FUPLATFORM enumeration.
+   * @note this api only worked in webassembly version
    */
   function fuSetPlatform(
       platform: FUPLATFORM,
   ): void;
 
   /**
-   * @brief 加载道具包，使其可以在主运行接口中被执行。一个道具包可能是一个功能模块或者多个功能模块的集合，加载道具包可以在流水线中激活对应的功能模块
-   * @param 道具bundle数据
-   * @return 道具句柄
+   * @brief Create an accessory item from a binary package, you can discard the data
+   * after the call.
+   * @param data is the pointer to the data
+   * @return an integer handle representing the item
    */
   function fuCreateItemFromPackage2(
       data: ArrayBuffer | Uint8Array | Uint16Array | Uint32Array,
   ): number;
-  
-  /**
-   * @brief 异步加载道具包
-   * @return 道具句柄的promise
-  */
+
   function fuCreateItemFromPackage(data: ArrayBuffer | Uint8Array | Uint16Array | Uint32Array): Promise<number>;
   
+  /**
+   * @brief Create an accessory item from a binary package, you can discard the data
+   * after the call.
+   * @param data is the pointer to the data
+   * @return an integer handle representing the item
+   */
   function fuCreateLiteItemFromPackage(
       handle: number,
       data: ArrayBuffer | Uint8Array | Uint16Array | Uint32Array,
   ): number;
 
   /**
-   * @brief 设置默认的人脸朝向。
-   * @param 要设置的人脸朝向，取值范围为 0-3，分别对应人脸相对于图像数据旋转0度、90度、180度、270度。
+   * @brief Set the default rotationMode.
+   * @param rotationMode is the default rotationMode to be set to, one of 0..3 should
+   * work.
    */
   function fuSetDefaultRotationMode(
       rotationMode: number,
   ): void;
 
   /**
-   * @brief销毁一个指定道具。
-   * @param 道具句柄
+   * @brief Destroy an accessory item. This function no need to be called in the
+   * same GLES context / thread as the original fuCreateItemFromPackage.
+   * @param item is the handle to be destroyed.
    */
   function fuDestroyItem(
       item: number,
   ): void;
 
   /**
-   * @brief 销毁所有道具
+   * @brief Destroy all accessory items ever created.This function MUST be called in
+   * the same GLES context / thread as the original fuCreateItemFromPackage.
    */
   function fuDestroyAllItems(): void;
 
   /**
-   * @brief 销毁SDK所有数据
+   * @brief Destroy all internal data, resources, threads, etc.
    */
   function fuDestroyLibData(): void;
 
   /**
-   * \brief 清除gl资源
+   * \brief Call this function when the GLES context has been lost and recreated.
+   * That isn't a normal thing, so this function could leak resources on
+   * each. This function only releses all gl resource compared to fuOnDeviceLost
+   * call.
    */
   function fuReleaseGLResources(): void;
 
   /**
-   * \brief 清除人脸检测器的缓存
+   * \brief Call this function to reset the face tracker on camera switches
    */
   function fuOnCameraChange(): void;
 
   /**
-   * @brief 将输入纹理渲染到canvas上
-   * @param texture 输入纹理id(通过fuRegisterNativeTexture将webgl纹理注册到sdk内部)
-   * @param format 纹理内容格式，目前只支持RGBA_TEXTURE
-   * @param w 宽度
-   * @param h 高度
-   * @param framed_id 帧id.
-   * @param p_items 道具列表
-   * @param func_flag 渲染功能flag
-   * @param p_item_masks 道具掩码，表示在多人模式下，每个道具具体对哪几个人脸生效。该数组长度应和 p_items 一致，每个道具一个int类型掩码。掩码中，从int低位到高位，第i位值为1代表该道具对第i个人脸生效，值为0代表不生效。
-   * @param output_viewport 指定canvas的viewport
+   * @brief render a webgl rendertexture to canvas which binded to sdk
+   * @param texture texture id
+   * @param format only RGBA_TEXTURE is supported
+   * @param w specifies the image width
+   * @param h specifies the image height
+   * @param framed_id specifies the current frame id. To get animated effects,
+   * please increase frame_id by 1 whenever you call this.
+   * @param p_items points to the list of items
+   * @param func_flag flags indicate all changable functionalities of render
+   * interface
+   * @param p_item_masks indicates a list of masks for each item, bitwisely work
+   * on certain face
+   * @param output_viewport specifies the viewport of the output canvas
+   * @return description of the return value
    */
   function fuRenderTextureToCanvas(
       texture: number,
@@ -446,17 +427,21 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
       output_viewport: CanvasViewport,
   ): void;
 
-   /**
-   * @brief 将输入 图像渲染到canvas上
-   * @param buffer 输入图像buffer
-   * @param format 纹理内容格式，目前只支持RGBA_TEXTURE
-   * @param w 宽度
-   * @param h 高度
-   * @param framed_id 帧id.
-   * @param p_items 道具列表
-   * @param func_flag 渲染功能flag
-   * @param p_item_masks 道具掩码，表示在多人模式下，每个道具具体对哪几个人脸生效。该数组长度应和 p_items 一致，每个道具一个int类型掩码。掩码中，从int低位到高位，第i位值为1代表该道具对第i个人脸生效，值为0代表不生效。
-   * @param output_viewport 指定canvas的viewport
+  /**
+   * @brief render a webgl rendertexture to canvas which binded to sdk
+   * @param buffer input buffer
+   * @param format buffer format
+   * @param w specifies the image width
+   * @param h specifies the image height
+   * @param framed_id specifies the current frame id. To get animated effects,
+   * please increase frame_id by 1 whenever you call this.
+   * @param p_items points to the list of items
+   * @param func_flag flags indicate all changable functionalities of render
+   * interface
+   * @param p_item_masks indicates a list of masks for each item, bitwisely work
+   * on certain face
+   * @param output_viewport specifies the viewport of the output canvas
+   * @return description of the return value
    */
   function fuRenderBufferToCanvas(
       buffer: ArrayBuffer | Uint8Array | Uint16Array | Uint32Array,
@@ -471,37 +456,53 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
   ): void;
 
   /**
-   * @brief 定义输入纹理转换矩阵，输入包含纹理时，可用于旋转输入纹理
-   * @param tex_trans_mat, 旋转类别，参见TRANSFORM_MATRIX定义。
+   * @brief input description for fuRender api, use to transform the input gpu
+   * texture to portrait mode(head-up). then the final output will portrait mode.
+   * the outter user present render pass should use identity matrix to present the
+   * result.
+   * @param tex_trans_mat, the transform matrix use to transform the input
+   * texture to portrait mode.
+   * @note when your input is cpu buffer only don't use
+   * this api, fuSetInputCameraBufferMatrix will handle all case.
    */
   function fuSetInputCameraTextureMatrix(
       matrix: FUTRANSFORM,
   ): void;
 
   /**
-   * @brief 定义输入buffer矩阵，输入包含buffer时，可用于旋转输入buffer
-   * @param tex_trans_mat, 旋转类别，参见TRANSFORM_MATRIX定义。
+   * @brief input description for fuRender api, use to transform the input cpu
+   * buffer to portrait mode(head-up). then the final output will portrait mode. the
+   * outter user present render pass should use identity matrix to present the
+   * result.
+   * @param buf_trans_mat, the transform matrix use to transform the input
+   * cpu buffer to portrait mode.
+   * @note when your input is gpu texture only don't
+   * use this api, fuSetInputCameraTextureMatrix will handle all case.
    */
   function fuSetInputCameraBufferMatrix(
       matrix: FUTRANSFORM,
   ): void;
 
   /**
-   * @brief 设置由`fuSetInputCameraTextureMatrix`设置的TransformMatrix是否生效。
+   * @brief set input camera texture transform matrix state, turn on or turn off
    */
   function fuSetInputCameraTextureMatrixState(
       isEnable: boolean,
   ): void;
 
   /**
-   * @brief 设置由`fuSetInputCameraBufferMatrixState`设置的TransformMatrix是否生效。
+   * @brief set input camera buffer transform matrix state, turn on or turn off
    */
   function fuSetInputCameraBufferMatrixState(
       isEnable: boolean,
   ): void;
 
   /**
-   * @brief 修改或设定道具包中变量的值。可以支持的道具包变量名、含义、及取值范围需要参考道具的文档
+   * @brief Set an item parameter to a double value
+   * @param obj_handle specifies the item
+   * @param name is the parameter name
+   * @param value is the parameter value to be set
+   * @return zero for failure, non-zero for success
    */
   function fuItemSetParamd(
       item: number,
@@ -509,44 +510,78 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
       value: number,
   ): number;
 
+  /**
+   * @brief Get an item parameter as a double value
+   * @param obj_handle specifies the item
+   * @param name is the parameter name
+   * @return double value of the parameter
+   */
   function fuItemGetParamd(
       item: number,
       name: string,
   ): number;
 
+  /**
+   * @brief Set an item parameter to a string value
+   * @param item specifies the item
+   * @param name is the parameter name
+   * @param value is the parameter value to be set
+   * @return zero for failure, non-zero for success
+   */
   function fuItemSetParams(
       item: number,
       name: string,
       value: string,
   ): number;
 
+  /**
+   * @brief Get an item parameter as a string
+   * @param item specifies the item
+   * @param name is the parameter name
+   * @return return the string
+   */
   function fuItemGetParams(
       item: number,
       name: string,
   ): string;
 
+  /**
+   * @brief Set an item parameter to a double array
+   * @param item specifies the item
+   * @param name is the parameter name
+   * @param value points to an array of doubles
+   * @param n specifies the number of elements in value
+   * @return zero for failure, non-zero for success
+   */
   function fuItemSetParamdv(
       item: number,
       name: string,
       value: Float64Array,
   ): number;
 
+  /**
+   * @brief Get an item parameter as a double array
+   * @param item specifies the item
+   * @param name is the parameter name
+   * @return the double array
+   */
   function fuItemGetParamdv(
       item: number,
       name: string,
   ): Float64Array;
 
   /**
-   * @brief 查询sdk是否以及初始化
-   * @return 1表示已初始化，0表示未初始化
+   * @brief Get library init status
+   * @return 1 inited, 0 not init.
    */
   function fuIsLibraryInit(): boolean;
 
   /**
-   * @brief 在fuSetup后，可以预先加载未来可能需要使用到的AI能力。
-   * @param data - ai bundle数据
-   * @param type - ai 能力类型
-   * @return 0为失败，1为成功
+   * @brief Load AI model data, to support tongue animation.
+   * @param data - the pointer to AI model data 'ai_xxx.bundle',which is along
+   * beside lib files in SDK package
+   * @param type - define in FUAITYPE enumeration.
+   * @return zero for failure, one for success.
    */
   function fuLoadAIModelFromPackage(
       data: ArrayBuffer | Uint8Array | Uint16Array | Uint32Array,
@@ -554,75 +589,84 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
   ): boolean;
 
   /**
-   * @brief 设置最大人脸数，默认值为1
+   * @brief Set the maximum number of faces we track. The default value is 1.
+   * @param n is the new maximum number of faces to track
+   * @return The previous maximum number of faces tracked
    */
   function fuSetMaxFaces(
       max_faces: number,
   ): boolean;
 
   /**
-   * @brief 设置人脸检测模式
-   * @param mode, 0表示图片模式, 1表示视频模式，默认值为1
+   * @brief set faceprocessor's face detect mode. when use 1 for video mode, face
+   * detect strategy is opimized for no face scenario. In image process scenario,
+   * you should set detect mode into 0 image mode.
+   * @param mode, 0 for image, 1 for video, 1 by default
    */
   function fuSetFaceProcessorDetectMode(
       mode: number,
   ): void;
 
   /**
-   * @brief 获取ai模型是否被加载
-   * @param type - 需要查询的ai类型
-   * @return 0表示未加载，1表示已经加载
+   * @brief Get AI Model load status
+   * @param type - define in FUAITYPE enumeration.
+   * @return zero for unloaded, one for loaded.
    */
   function fuIsAIModelLoaded(
       type: FUAITYPE,
   ): boolean;
 
   /**
-   * @brief 设置人脸模型加载配置，参考 FUAIFACEMODELCONFIG
+   * @brief set face processor model config, ref to FUAIFACEMODELCONFIG
    */
   function fuSetFaceModelConfig(
       config: FUAIFACEMODELCONFIG,
   ): void;
 
   /**
-   * @brief 设置人脸算法加载配置，参考FUAIFACEALGORITHMCONFIG
+   * @brief set face processor algorithm config, ref to FUAIFACEALGORITHMCONFIG ,
+   * use to disable some sub-module while load face ai module, default is -1 which
+   * disable all sub-modules.
    */
   function fuSetFaceAlgorithmConfig(
       config: FUAIFACEALGORITHMCONFIG,
   ): void;
 
   /**
-   * @brief 设置人体模型加载配置，参考FUAIHUMANMODELCONFIG
+   * @brief set face processor model config, ref to FUAIHUMANMODELCONFIG, config cpu
+   * or gpu mode,eth.
    */
   function fuSetHumanModelConfig(
       config: FUAIHUMANMODELCONFIG,
   ): void;
 
   /**
-   * @brief 设置人体算法加载配置，参考FUAIHUMANALGORITHMCONFIG
+   * @brief set human processor algorithm config, ref to FUAIHUMANALGORITHMCONFIG ,
+   * use to disable some sub-module while load human ai module
    */
   function fuSetHumanAlgorithmConfig(
       config: FUAIHUMANALGORITHMCONFIG,
   ): void;
 
   /**
-   * @brief 设置人脸点位质量.
-   * @param 质量，0表示低质量，1表示中等，2表示高质量
+   * @brief set ai model FaceProcessor's landmark quality.
+   * @param quality, landmark quality, 0 for low quality, 1 for mediem, 2 for high
+   * quality. 1 by default.
    */
   function fuFaceProcessorSetFaceLandmarkQuality(
       quality: number,
   ): void;
 
   /**
-   * @brief 获取人脸识别数量
-   * @return  人脸的数量
+   * @brief get ai model FaceProcessor's tracking face count.
+   * @return  num of faces.
    */
   function fuFaceProcessorGetNumResults(): number;
 
   /**
-   * @brief 启动TimeProfile
+   * @brief Enable Frame time profile
    * @param interval - default is 300.
-   * @param detail - 是否汇报细节
+   * @param detail - report detail
    */
   function fuEnableFrameTimeProfile(
       interval: number,
@@ -630,26 +674,24 @@ Funamawebassembly 库是对CNamaSDK的再封装，接口声明在funamawebassemb
   ): void;
 
   /**
-   * @brief 关闭TimeProfile
+   * @brief Disable time profile
    * 
    */
   function fuDisableFrameTimeProfile(): void;
-    
-    
-     /**
-   * @brief 注册WebglTexture到sdk中，供sdk使用
-   * @param webglTexture
-   * @return 注册的句柄
+
+  /**
+   * @brief Register a webgl texture to the Nama SDK
+   * @param texture is the webgl texture
+   * @return an integer handle representing the texture
    */
   function fuRegisterNativeTexture(texture: WebGLTexture): number;
 
   /**
-   * @brief 取消注册纹理
-   * @param 已注册的句柄
+   * @brief Unregister a native texture
+   * @param id is the integer handle representing the texture
    * @return void
    */
   function fuUnRegisterNativeTexture(id: number): void;
 
-
-  
+ 
 ```
