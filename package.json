@@ -1,7 +1,7 @@
 {
   "name": "nama-web",
   "private": true,
-  "version": "0.0.1-161",
+  "version": "0.0.1-163",
   "type": "module",
   "scripts": {
     "dev": "vite",

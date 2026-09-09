@@ -7,23 +7,30 @@ stages:
 
   # 安装依赖的作业
 build-test:
+  tags: 
+    - gfw
   only:
     - tags
   stage: build
   script:
     - docker -v
-    - docker buildx build --push --rm -t ${CONTAINER_PATH}:${CI_BUILD_TAG}-test --build-arg APP_ENV=test .
+    - docker build --rm -t ${CONTAINER_PATH}:${CI_BUILD_TAG}-test --build-arg APP_ENV=test .
+    - docker push ${CONTAINER_PATH}:${CI_BUILD_TAG}-test
 
 build-prod:
   stage: build
+  tags: 
+    - gfw
   only:
     - tags
   script:
     - docker -v
-    - docker buildx build -t ${CONTAINER_PATH}:${CI_BUILD_TAG}-prod --build-arg APP_ENV=prod .
+    - docker build -t ${CONTAINER_PATH}:${CI_BUILD_TAG}-prod --build-arg APP_ENV=prod .
   when: manual
 
 deploy-prod:
+  tags: 
+    - gfw
   only:
     - tags
   stage: deploy-prod
