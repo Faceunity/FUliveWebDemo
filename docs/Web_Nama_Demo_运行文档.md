@@ -17,10 +17,15 @@
 - 下载源代码
 - 证书（非必须），如果是独立开发项目，才需要自行申请证书。
   - 申请证书（注意与访问域名强绑定的）
-  - 替换证书： 更换CDN内对应的证书。
+  - 替换证书： 更换对应的证书。
     ```typescript
-    // CDNBase  是所有bunlde等镜头资源cdn 地址
-    CDNBase + `/authpack.bin`
+    // 直接将证书文件放置于下面这个目录
+    /public/bundle + '/authpack.bin'
+
+    // public/bundle 目录下的所有资源都可通过cdn管理 只需要将 src/common/global.ts 中的 origin 变量替换为cdn存放地址
+    const origin = "/bundle";
+    export const CDNBase = origin;
+    // 注：自行通过cdn管理时 bundle目录内结构不要随意变动 只需完整复制粘贴
     ```
     获取证书方法：
     1、拨打电话 0571-89774660

@@ -6,9 +6,9 @@ export enum DeviceType {
   MOBILE,
 }
 
-const origin = "https://fu-sdk.oss-cn-hangzhou.aliyuncs.com";
+const origin = "/bundle";
 
-export const CDNBase = origin + "/WebDemo/" + import.meta.env.VITE_APP_ENV;
+export const CDNBase = origin;
 
 export interface PanelData {
   去黑眼圈: string;
